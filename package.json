@@ -1,0 +1,27 @@
+{
+  "name": "lyricist",
+  "version": "1.0.0",
+  "description": "Spotify lyrics client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-Magnificent/Lyricist.git"
+  },
+  "author": "Ayush Poddar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mr-Magnificent/Lyricist/issues"
+  },
+  "homepage": "https://github.com/Mr-Magnificent/Lyricist#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "cryptr": "^4.0.0",
+    "express": "^4.16.3",
+    "querystring": "^0.2.0",
+    "request": "^2.87.0"
+  }
+}
