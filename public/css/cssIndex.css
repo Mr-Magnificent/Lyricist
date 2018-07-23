@@ -1,0 +1,102 @@
+html, body {
+    height: 100%;
+    margin: 0 auto;
+    color: rgb(255, 255, 255);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/francisco-moreno-53323-unsplash-compressor (1) (1).jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+ul {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    background-color: rgba(8,8,8,1);
+    font-size: 35px;
+}
+
+section {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100% - 51px);
+    align-items: center;
+}
+
+section > div{
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+#reButton {
+    /*min-width: 60px;*/
+    display: inline-block;
+    min-width: 185px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    border-radius: 7px 7px 7px 7px;
+    padding: 5px 0;
+    height: 30px;
+    transition: all 0.2s;
+    margin-bottom: 2em;
+}
+
+#reButton:hover {
+    transition: background-color 0.4s linear;
+    background-color: #191414;
+}
+
+#reButton > span {
+    vertical-align: super;
+    /*text-decoration: none;*/
+    color: black;
+    transition: all 0.2s;
+}
+
+#reButton:hover > span {
+    color: #ffffff;
+    transition: color 0.3s linear;
+}
+
+a {
+    text-decoration: none;
+}
+
+.cred {
+    width: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.cred + div {
+    opacity: 0;
+    width: 50%;
+    margin: 10px auto;
+    font-size: 14px;
+    cursor: default;
+}
+
+.cred:hover + div {
+    opacity: 1;
+    transition: all 0.2s;
+}
