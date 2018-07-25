@@ -7,17 +7,27 @@ $(document).ready(function () {
     })();
 });
 
+
+
 function retriveSongMeta(callback) {
     $.ajax({
         url: '/reload',
         method: 'POST',
         success: function (data) {
-            /*if (data => undefined : call please play a song*/
             /*call the lyrics api*/
-            let artist = data.item.artists[0].name;
-            let songName = (data.item.name).split(/[(\-\[]/);
-            songName = songName[0];
-            bringLyrics(artist, songName);
+            if (!data) {
+                /*if (data => undefined : call please play a song*/
+                console.log("no song playing");
+            } else {
+                let artist = data.item.artists[0].name;
+                let songName = (data.item.name).split(/[(\-\[]/);
+                songName = songName[0];
+                let songMeta = document.getElementById("current-song-playing").innerHTML;
+                let template = Handlebars.compile(songMeta),
+                currentSongMeta = document.getElementById('metadataSection');
+                currentSongMeta.innerHTML = template(data);
+                bringLyrics(artist, songName);
+            }
         }
     });
 }
@@ -27,7 +37,7 @@ function bringLyrics(artist, songName, callback) {
         url: `https://api.lyrics.ovh/v1/${artist}/${songName}`,
         method: 'get',
         success: function (data) {
-            console.log(data.lyrics);
+            $('#lyricSection').text(data.lyrics);
         },
         dataType: 'json'
     });

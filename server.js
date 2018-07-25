@@ -132,8 +132,6 @@ app.post('/reload', function(req, res) {
             };
 
             request.get(options, function(error, response, body) {
-                console.log(body.item.album.name);
-                console.log(body.item.name);
                 res.send(body);
             });
         }

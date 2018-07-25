@@ -1,0 +1,99 @@
+html, body {
+    margin: 0;
+    position: relative;
+    height: 100%;
+    background-color: black;
+    overflow-y: auto;
+}
+
+ul {
+    margin: 0;
+    color: white;
+    list-style: none;
+    padding: 0 5px;
+    background-color: rgba(8,8,8,1);
+    font-size: 25px;
+}
+
+li {
+    display: inline;
+    padding: 0 5px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*li:hover {*/
+    /*background-color: black;*/
+/*}*/
+
+.left {
+    float: right;
+}
+
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100% - 51px);
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+#main > section {
+    width: 47%;
+    margin-top: 25px;
+    border-radius: 20px;
+    height: calc(100% - 25px);
+    background-color: #191414;
+}
+
+#metadataSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+#metadataSection > div {
+    color: #ffffff;
+}
+
+#image {
+    width: 40%;
+    padding: 20px 20px;
+}
+
+#image > img {
+    max-width: 150px;
+}
+
+#songInfo {
+    width: 60%;
+    padding: 20px 20px 20px 0;
+}
+
+#lyricSection {
+    white-space: pre-wrap;
+    padding: 20px;
+    overflow-y: auto;
+    color: white;
+}
+
+#songInfo span {
+    width: 100%;
+    display: inline-block;
+}
+
+#songName {
+    font-size: 3vw;
+}
+
+.songMeta {
+    font-size: 2.3vw;
+    max-font-size: 10px;
+    color: #bababa;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
