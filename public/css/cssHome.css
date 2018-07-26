@@ -38,20 +38,29 @@ li {
     height: calc(100% - 51px);
     width: 100%;
     justify-content: space-evenly;
+    padding-top: 22px;
 }
 
-#main > section {
+#navbar {
+    position: fixed;
+    width: 100%;
+}
+
+#groupMetaSuggest {
     width: 47%;
     margin-top: 25px;
-    border-radius: 20px;
-    height: calc(100% - 25px);
-    background-color: #191414;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #metadataSection {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
+    height: 48%;
+    border-radius: 20px;
+    background-color: #191414;
 }
 
 #metadataSection > div {
@@ -77,6 +86,36 @@ li {
     padding: 20px;
     overflow-y: auto;
     color: white;
+    height: calc(100% - 25px);
+    border-radius: 20px;
+    background-color: #191414;
+    width: 47%;
+    margin-top: 25px;
+    position: relative;
+    top: 0;
+}
+
+#options {
+    justify-content: space-evenly;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    height: 5%;
+    font-size: 19px;
+    background-color: crimson;
+}
+
+#lyricSection >div > div {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    cursor: pointer;
+}
+
+#lyricSection > div > div:hover {
+    background-color: #af122d;
 }
 
 #songInfo span {
@@ -94,6 +133,105 @@ li {
     color: #bababa;
 }
 
+#suggestSongSection {
+    height: 50%;
+    width: 100%;
+    margin: 0;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: #191414;
+}
+
+#beforeGetSuggestion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#beforeGetSuggestion > button {
+    height: 34px;
+    width: 30%;
+    border-radius: 6px;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+#afterGetSuggestion {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+#afterGetSuggestion > div {
+    width: 33.33%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#afterGetSuggestion > div > a {
+    text-decoration: none;
+}
+
+#afterGetSuggestion img {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}
+
+#afterGetSuggestion figure {
+    margin: 0 auto;
+}
+
+#afterGetSuggestion figcaption {
+    text-align: center;
+    margin-top: 5%;
+    color: #ffffff;
+}
+
+#afterGetSuggestion span {
+    font-size: 10px;
+    color: #bfbfbf;
+}
+
 ::-webkit-scrollbar {
     display: none;
+}
+
+@media screen and (max-width: 600px) {
+    #lyricSection {
+        order: 1;
+        width: 90%;
+    }
+
+    #groupMetaSuggest {
+        order: 2;
+        width: 90%;
+    }
+
+    #songName {
+        font-size: 4vw;
+    }
+
+    #songInfo {
+        font-size: 3vw;
+    }
+
+    #metadataSection {
+        height: 100%;
+        margin-bottom: 25px;
+    }
+
+    #suggestSongSection {
+        min-height: 100px;
+        height: 100%;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    #afterGetSuggestion {
+        align-items: baseline;
+    }
 }

@@ -1,13 +1,23 @@
 let express = require('express');
 let request = require('request');
+const bodyParser = require('body-parser');
 let querystring = require('querystring');
 let cookieParser = require('cookie-parser');
 
+
 let app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 let client_id = 'cf9e84bb332e4eb0b1de14191844a9c9'; // Your client id
 let client_secret = 'e63cc432563b46148801f9608f981277'; // Your secret
 let redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+
+
+let lastfm_client_id = '9ad53d8a277ac7f394e209944c6fc2fc',
+    lastfm_client_secret = '9160270b13fb50bb4ab7f3a8054bbae3',
+    lastfm_redirect_uri = 'http://localhost:8888/suggest';
 
 let generateRandomString = function(length) {
     let text = '';
@@ -138,6 +148,26 @@ app.post('/reload', function(req, res) {
     });
 });
 
+
+app.get('/suggest', function (req, res) {
+    let songName = req.query.song.trim();
+    let artistName = req.query.artistName.trim();
+    console.log(artistName, songName);
+    let url = 'http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&' +
+        querystring.stringify({
+            artist: artistName,
+            track: songName,
+            autocorrect: 1,
+            limit: 3,
+            api_key: lastfm_client_id,
+            format: 'json'
+        });
+    console.log(url);
+    request.get(url, function (error, response, body) {
+        console.log(body);
+        res.send(body);
+    });
+});
 
 app.listen(8888, function () {
     console.log("server is listening at port 8888");
