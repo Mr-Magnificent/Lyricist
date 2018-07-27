@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" content="text/css" href="css/cssHome.css ">
-    <title>test</title>
+    <title>Lyricist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <header id="navbar">
@@ -27,12 +28,20 @@
         </section>
         <section id="lyricSection">
             <div id="options">
-                <div>Reload</div>
+                <div onclick="reloadLyrics()">Reload</div>
                 <div onclick="changeTheme()">Theme</div>
-                <div><span style="font-size: 12px">A</span><span style="font-size: 18px">A</span></div>
-                <div><span style="font-size: 18px">A</span><span style="font-size: 12px">A</span></div>
+                <div onclick="increaseFont()"><span style="font-size: 12px">A</span><span style="font-size: 18px">A</span></div>
+                <div onclick="decreaseFont()"><span style="font-size: 18px">A</span><span style="font-size: 12px">A</span></div>
             </div>
             <div id="lyricsDiv"></div>
+            <div id="lyricsFetchError">
+                Oops! There was a problem getting the current song from servers. Reasons it might have occurred<br />
+                A weird song name?
+                The servers are down
+                Spotify has stopped?<br />
+                You can still see similar songs or you can search google for the lyrics.<br /><br />
+                <button id="searchGoogleLyrics" onclick="googleSongLyrics()">Google It!</button>
+            </div>
         </section>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
