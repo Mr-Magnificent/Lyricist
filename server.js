@@ -16,7 +16,7 @@ let client_secret = 'e63cc432563b46148801f9608f981277'; // Your secret
 let redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 
-let lastfm_client_id = '9ad53d8a277ac7f394e209944c6fc2fc',
+let lastfm_client_id = '9ad53d8a277ac7f394e209944c6fc2fc';
 
 
 let generateRandomString = function(length) {
