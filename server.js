@@ -9,6 +9,7 @@ let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+let PORT = process.env.PORT || 8888;
 
 let client_id = 'cf9e84bb332e4eb0b1de14191844a9c9'; // Your client id
 let client_secret = 'e63cc432563b46148801f9608f981277'; // Your secret
@@ -16,8 +17,7 @@ let redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 
 let lastfm_client_id = '9ad53d8a277ac7f394e209944c6fc2fc',
-    lastfm_client_secret = '9160270b13fb50bb4ab7f3a8054bbae3',
-    lastfm_redirect_uri = 'http://localhost:8888/suggest';
+
 
 let generateRandomString = function(length) {
     let text = '';
@@ -169,6 +169,6 @@ app.get('/suggest', function (req, res) {
     });
 });
 
-app.listen(8888, function () {
-    console.log("server is listening at port 8888");
+app.listen(PORT, function () {
+    console.log("server is listening at port" + PORT);
 });

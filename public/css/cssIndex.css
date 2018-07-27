@@ -16,6 +16,12 @@ body {
     position: relative;
 }
 
+h1 {
+    font-size: 64px;
+    font-family: 'Amaranth', sans-serif;
+    margin-bottom: 31px;
+}
+
 ul {
     margin: 0;
     list-style: none;
@@ -46,6 +52,12 @@ footer {
     bottom: 0;
     font-size: 16px;
     padding-left: 10px;
+    width: 100%;
+}
+
+footer > div {
+    display: flex;
+    justify-content: center;
 }
 
 #reButton {
@@ -100,3 +112,4 @@ a {
     opacity: 1;
     transition: all 0.2s;
 }
+
