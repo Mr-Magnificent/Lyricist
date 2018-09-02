@@ -3,11 +3,11 @@ let songName;
 let reloadCount = 0;
 
 $(document).ready(function () {
-    (function(){
+    (function () {
         let url = new URL(window.location.href);
         let access = url.searchParams.get('access');
         document.cookie = `access=${access}`;
-        $('#lyricsFetchError').hide();
+        // $('#lyricsFetchError').hide();
         $('#beforeGetSuggestion').show();
         $('#afterGetSuggestion').hide();
         retriveSongMeta();
@@ -48,40 +48,43 @@ function bringLyrics(artist, songName, callback) {
             $('#lyricsDiv').text(data.lyrics);
             reloadCount = 0;
         },
-    error: function() {
+        error: function () {
             $('#lyricsDiv').text('');
             $('#lyricsFetchError').show();
             reloadCount += 1;
-    },
+        },
         dataType: 'json'
     });
 }
 
 function getSimilarSongs() {
-    $.ajax ({
+    $.ajax({
         url: '/suggest',
         method: 'get',
-        data: {artistName: artist, song: songName},
+        data: {
+            artistName: artist,
+            song: songName
+        },
         success: function (data) {
             /*return the list of similar songs
-            * get the xtemplate for similar song and fill the data
-            * show/hide*/
+             * get the xtemplate for similar song and fill the data
+             * show/hide*/
             console.log(data);
             data = JSON.parse(data);
-            $('#beforeGetSuggestion').hide();
-            $('#afterGetSuggestion').show(function () {
-                let suggestSong = document.getElementById('suggest-songs-inner').innerHTML;
-                console.log(suggestSong);
-                let template = Handlebars.compile(suggestSong),
-                    songSuggestion = document.getElementById('afterGetSuggestion');
+            let suggestSong = document.getElementById('suggest-songs-inner').innerHTML;
+            let template = Handlebars.compile(suggestSong);
+            let songSuggestion = document.getElementById('afterGetSuggestion');
+            setTimeout(function () {
+                $('#beforeGetSuggestion').hide();
                 songSuggestion.innerHTML = template(data);
-            });
+                $('#afterGetSuggestion').show(function () {});
+            }, 500);
 
         }
     })
 }
 
-let delete_cookie = function(name) {
+let delete_cookie = function (name) {
 
 };
 
@@ -92,18 +95,17 @@ function logout() {
 
 function changeTheme() {
     let lyricSection = $('#lyricSection');
-    let lyricFetchEror = $('#lyricsFetchError');
+    let lyricFetchError = $('#lyricsFetchError');
     let currentTheme = lyricSection.css("background-color");
     console.log(currentTheme);
     if (currentTheme === 'rgb(25, 20, 20)') {
         lyricSection.css("background-color", 'white');
         $('#lyricsDiv').css('color', 'black');
-        lyricFetchEror.css('color', 'black');
-    }
-    else {
+        lyricFetchError.css('color', 'black');
+    } else {
         lyricSection.css("background-color", '#191414');
         $('#lyricsDiv').css('color', 'white');
-        lyricFetchEror.css('color', 'white');
+        lyricFetchError.css('color', 'white');
     }
 }
 
@@ -131,10 +133,9 @@ function reloadLyrics() {
     $('#afterGetSuggestion').hide();
     if (reloadCount < 2) {
         retriveSongMeta();
-    }
-    else {
+    } else {
         /*show the option to search google
-        * hide the option otherwise*/
+         * hide the option otherwise*/
         $('#lyricsDiv').text(" ");
         $('#lyricsFetchError').show();
         retriveSongMeta();

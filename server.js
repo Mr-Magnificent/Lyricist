@@ -6,20 +6,22 @@ let cookieParser = require('cookie-parser');
 
 
 let app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 
 let PORT = process.env.PORT || 8888;
 
-let client_id = 'cf9e84bb332e4eb0b1de14191844a9c9'; // Your client id
-let client_secret = 'e63cc432563b46148801f9608f981277'; // Your secret
-let redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+let client_id = 'YOUR_CLIENT_ID'; // Your client id
+let client_secret = 'YOUR_SECRET_ID'; // Your secret
+let redirect_uri = 'YOUR_CALLBSCK_URL'; // Your redirect uri
 
 
-let lastfm_client_id = '9ad53d8a277ac7f394e209944c6fc2fc';
+let lastfm_client_id = 'YOUR_LASTFM_CLIENT_ID';
 
 
-let generateRandomString = function(length) {
+let generateRandomString = function (length) {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -52,7 +54,7 @@ app.get('/login', function (req, res) {
         }));
 });
 
-app.get('/callback', function(req, res) {
+app.get('/callback', function (req, res) {
 
     // your application requests refresh and access tokens
     // after checking the state parameter
@@ -81,7 +83,7 @@ app.get('/callback', function(req, res) {
             json: true
         };
 
-        request.post(authOptions, function(error, response, body) {
+        request.post(authOptions, function (error, response, body) {
             if (!error && response.statusCode === 200) {
 
                 let accessToken = body.access_token,
@@ -89,11 +91,13 @@ app.get('/callback', function(req, res) {
 
                 let options = {
                     url: 'https://api.spotify.com/v1/me/player/currently-playing',
-                    headers: { 'Authorization': 'Bearer ' + accessToken },
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    },
                     json: true
                 };
 
-                request.get(options, function(error, response, body) {
+                request.get(options, function (error, response, body) {
                     console.log(body);
                     res.redirect('http://localhost:8888/home.html?' +
                         querystring.stringify({
@@ -113,7 +117,7 @@ app.get('/callback', function(req, res) {
     }
 });
 
-app.post('/reload', function(req, res) {
+app.post('/reload', function (req, res) {
 
     // requesting access token from refresh token
     let refresh_token = req.cookies ? req.cookies['access'] : null;
@@ -123,7 +127,9 @@ app.post('/reload', function(req, res) {
     }
     let authOptions = {
         url: 'https://accounts.spotify.com/api/token',
-        headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+        headers: {
+            'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+        },
         form: {
             grant_type: 'refresh_token',
             refresh_token: refresh_token
@@ -131,17 +137,19 @@ app.post('/reload', function(req, res) {
         json: true
     };
 
-    request.post(authOptions, function(error, response, body) {
+    request.post(authOptions, function (error, response, body) {
         if (!error && response.statusCode === 200) {
             let accessToken = body.access_token;
 
             let options = {
                 url: 'https://api.spotify.com/v1/me/player/currently-playing',
-                headers: { 'Authorization': 'Bearer ' + accessToken },
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
                 json: true
             };
 
-            request.get(options, function(error, response, body) {
+            request.get(options, function (error, response, body) {
                 res.send(body);
             });
         }
